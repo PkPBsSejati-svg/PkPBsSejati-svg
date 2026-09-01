@@ -211,9 +211,7 @@
       border: none;
     }
 
-    /* =========================================================
-       BOTTOM TASKBAR SEB - PRESISI PEDOMAN FOTO 2, 3, DAN 4
-       ========================================================= */
+    /* BOTTOM TASKBAR SEB */
     .seb-bottom-bar {
       position: fixed;
       bottom: 0;
@@ -230,7 +228,6 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
 
-    /* Logo SEB Kiri Bawah */
     .seb-logo-container {
       width: 32px;
       height: 32px;
@@ -256,7 +253,7 @@
       color: #1c1c1e;
     }
 
-    /* DIALOG QUIT SESSION (iOS NATIVE) */
+    /* DIALOG QUIT SESSION (iOS NATIVE style) */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -354,6 +351,7 @@
 
 <body oncontextmenu="return false;">
 
+  <!-- OVERLAY MODE FULLSCREEN -->
   <div id="fullscreenOverlay">
     <h2>Mode Ujian Diharuskan</h2>
     <p style="margin-top: 10px; font-size: 14px; color: #cbd5e1;">Anda harus masuk ke mode layar penuh untuk mengakses soal.</p>
@@ -364,6 +362,7 @@
     </div>
   </div>
 
+  <!-- NAVBAR UTAMA -->
   <div class="navbar">
     <button class="nav-btn active" onclick="switchTab('homeTab', this)">Home</button>
     <button class="nav-btn" onclick="switchTab('kelasXTab', this)">Kelas X</button>
@@ -371,11 +370,12 @@
     <button class="nav-btn" onclick="switchTab('kelasXIITab', this)">Kelas XII</button>
   </div>
 
+  <!-- CONTAINER KONTEN -->
   <div class="container" id="mainContainer">
 
     <div id="homeTab" class="tab-content active">
       <h2 style="text-align: center; font-size: 17px; margin-top: 10px; color: #1c1c1e;">SMA KRISTEN SATYA WACANA</h2>
-      <p style="text-align: center; color: #2563eb; font-weight: 600; font-size: 12.5px; margin-bottom: 20px;">Leader - Explorer - Archiever - Disciple</p>
+      <p style="text-align: center; color: #2563eb; font-weight: 600; font-size: 12.5px; margin-bottom: 20px;">Leader - Explorer - Achiever - Disciple</p>
       
       <div style="text-align: center;">
         <img src="logo-asesmen.png" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/safeexambrowser/seb-mac/master/SafeExamBrowser/Resources/SEBIcon.png';" alt="Logo Asesmen" style="width: 240px; max-width: 80%; height: auto; border-radius: 50%;">
@@ -455,10 +455,12 @@
 
   </div>
 
+  <!-- CONTAINER IFRAME SOAL -->
   <div id="examFrameContainer">
-    <iframe id="examIframe" src="about:blank"></iframe>
+    <iframe id="examIframe" src="about:blank" allow="camera; microphone; display-capture"></iframe>
   </div>
 
+  <!-- BOTTOM BAR SEB -->
   <div class="seb-bottom-bar">
     <div class="seb-logo-container">
       <svg width="30" height="30" viewBox="0 0 100 100">
@@ -495,6 +497,7 @@
     </div>
   </div>
 
+  <!-- MODAL QUIT DIALOG -->
   <div id="quitModal" class="modal-backdrop">
     <div class="ios-alert">
       <div class="ios-alert-body">
@@ -521,6 +524,7 @@
     }
   });
 
+  /* LOGIKA FULLSCREEN & PEMBATASAN LAYAR */
   function enterFullscreen() {
     const elem = document.documentElement;
 
@@ -552,6 +556,7 @@
     }
   }
 
+  /* PENGATURAN IFRAME UJIAN */
   function openExam(url) {
     document.getElementById('mainContainer').style.display = 'none';
     const frameContainer = document.getElementById('examFrameContainer');
@@ -595,7 +600,8 @@
 
   function submitQuit() {
     const pwd = document.getElementById('quitPassword').value;
-    if (pwd === "1234" || pwd === "admin" || pwd !== "") {
+    // Password disesuaikan (misal: "1234" atau "admin")
+    if (pwd === "1234" || pwd === "admin") {
       isSecretUnlocked = true;
       closeQuitDialog();
       
@@ -610,12 +616,13 @@
       }
 
       document.getElementById('fullscreenOverlay').style.display = 'none';
-      alert('Session Ended.');
+      alert('Sesi Ujian Selesai.');
     } else {
-      alert('Incorrect Password');
+      alert('Kata sandi salah!');
     }
   }
 
+  /* SISTEM TANGGAL & WAKTU */
   function updateDateTime() {
     const now = new Date();
     const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
@@ -637,8 +644,19 @@
   setInterval(updateDateTime, 1000);
   updateDateTime();
 
+  /* FITUR KEAMANAN TAMBAHAN: PROTEKSI KEYBOARD & KLIK KANAN */
   document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    // Memblokir Ctrl+C, Ctrl+V, Ctrl+U, Ctrl+S, Ctrl+P, dan F12
+    if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'u', 's', 'p', 'a'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
   });
 </script>
 
