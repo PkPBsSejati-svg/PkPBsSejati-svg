@@ -35,7 +35,7 @@
       align-items: center;
       min-height: 100vh;
       padding-top: max(12px, env(safe-area-inset-top));
-      padding-bottom: calc(52px + env(safe-area-inset-bottom));
+      padding-bottom: calc(54px + env(safe-area-inset-bottom));
     }
 
     /* FULLSCREEN OVERLAY */
@@ -77,7 +77,7 @@
       line-height: 1.4;
     }
 
-    /* TOP NAVIGATION TABS (PRESISI SEPERTI GAMBAR KE-2) */
+    /* TOP NAVIGATION TABS */
     .navbar {
       width: 100%;
       background: #2c2c2e;
@@ -157,7 +157,6 @@
       line-height: 1.35;
     }
 
-    /* TOMBOL JADWAL SEPERTI IMAGE_D3100B.JPG */
     .jadwal {
       margin-bottom: 8px;
     }
@@ -213,41 +212,40 @@
       border: none;
     }
 
-    /* BOTTOM TASKBAR SEB (PRESISI DENGAN CODE SEB GITHUB) */
+    /* BOTTOM TASKBAR SEB (PRESISI GAMBAR 2) */
     .seb-bottom-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 46px;
-      background: #d1d5db;
-      border-top: 1px solid #b0b4ba;
+      height: 52px;
+      background: #b8bdc4;
+      border-top: 1px solid #9fa4ac;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 12px;
+      padding: 0 14px;
       z-index: 500;
       padding-bottom: env(safe-area-inset-bottom);
     }
 
     .seb-logo-container {
-      width: 28px;
-      height: 28px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .seb-logo-container img {
+    .seb-logo-container svg {
       width: 100%;
       height: 100%;
-      object-fit: contain;
     }
 
     .seb-actions {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .seb-btn {
@@ -258,9 +256,10 @@
       align-items: center;
       justify-content: center;
       padding: 2px;
+      color: #2c2c2e;
     }
 
-    /* DIALOG QUIT SESSION (iOS NATIVE LOOK - FOTO KE-3) */
+    /* DIALOG QUIT SESSION (iOS NATIVE) */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -369,7 +368,7 @@
     </div>
   </div>
 
-  <!-- NAVIGATION BAR (HOME, KELAS X, XI, XII) -->
+  <!-- NAVIGATION BAR -->
   <div class="navbar">
     <button class="nav-btn active" onclick="switchTab('homeTab', this)">Home</button>
     <button class="nav-btn" onclick="switchTab('kelasXTab', this)">Kelas X</button>
@@ -424,7 +423,7 @@
       <div class="jadwal"><div class="label" onclick="toggle(this)">UH - REMIDI - Literasi/Numerasi</div></div>
     </div>
 
-    <!-- KELAS XII (PERSIS GAMBAR KE-2) -->
+    <!-- KELAS XII -->
     <div id="kelasXIITab" class="tab-content">
       <h2>ASESMEN KELAS XII</h2>
       <marquee class="running-text" behavior="scroll" direction="left" scrollamount="6">
@@ -471,43 +470,42 @@
     <iframe id="examIframe" src="about:blank"></iframe>
   </div>
 
-  <!-- BOTTOM BAR TASKBAR SAFE EXAM BROWSER -->
+  <!-- BOTTOM TASKBAR SEB (SAMA DENGAN GAMBAR KE-2) -->
   <div class="seb-bottom-bar">
-    <!-- LOGO SEB ORIGINAL DARI IMAGE_D30CA6.PNG (EMBEDDED BASE64) -->
+    <!-- LOGO SEB DENGAN WARNA ASLI -->
     <div class="seb-logo-container">
-      <svg width="28" height="28" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="46" fill="#2d82c4" stroke="#1d6296" stroke-width="2"/>
-        <path d="M 18,52 Q 50,22 82,52 Q 50,82 18,52 Z" fill="#eb8324"/>
-        <path d="M 28,30 L 48,15 L 42,42 L 32,38 Z" fill="#65686b"/>
-        <rect x="24" y="24" width="22" height="22" rx="4" transform="rotate(-25 35 35)" fill="#505356" stroke="#333" stroke-width="2"/>
-        <circle cx="50" cy="50" r="8" fill="#1c1c1e"/>
+      <svg width="34" height="34" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="46" fill="#1b75bc"/>
+        <path d="M 18,52 Q 50,20 82,52 Q 50,84 18,52 Z" fill="#e87722"/>
+        <path d="M 26,28 L 50,12 L 42,42 L 30,36 Z" fill="#65686b"/>
+        <rect x="22" y="22" width="24" height="24" rx="4" transform="rotate(-28 34 34)" fill="#4d5154" stroke="#222" stroke-width="2"/>
+        <circle cx="50" cy="52" r="8" fill="#111111"/>
       </svg>
     </div>
 
-    <!-- 3 TOMBOL KANAN SEB -->
+    <!-- 3 TOMBOL SEPERTI DI GAMBAR KE-2 -->
     <div class="seb-actions">
-      <!-- 1. Tombol Resize / Scaling -->
-      <button class="seb-btn" onclick="enterFullscreen()" title="Zoom">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2c2c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="3"/>
-          <polyline points="9 15 15 9"/>
-          <polyline points="15 15 9 9"/>
+      <!-- 1. Tombol Zoom/Resize (Kotak dengan Panah Atas-Bawah Presisi Gambar 2) -->
+      <button class="seb-btn" onclick="enterFullscreen()" title="Fit Window / Zoom">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3.5" ry="3.5"/>
+          <path d="M12 7v10"/>
+          <path d="M9 10l3-3 3 3"/>
+          <path d="M9 14l3 3 3-3"/>
         </svg>
       </button>
 
       <!-- 2. Tombol Reload -->
       <button class="seb-btn" onclick="location.reload()" title="Reload">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2c2c2e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21.5 2v6h-6"/>
-          <path d="M2.5 22v-6h6"/>
-          <path d="M2 11.5a10 10 0 0 1 18.8-4.3L21.5 8"/>
-          <path d="M22.5 12.5a10 10 0 0 1 -18.8 4.3L2.5 16"/>
+          <path d="M21.1 8A10 10 0 1 0 22 12.5"/>
         </svg>
       </button>
 
-      <!-- 3. Tombol Power / Quit Session (DENGAN POP-UP SEPERTI GAMBAR KE-3) -->
+      <!-- 3. Tombol Power / Quit Session -->
       <button class="seb-btn" onclick="showQuitDialog()" title="Quit Session">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2c2c2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
           <line x1="12" y1="2" x2="12" y2="12"/>
         </svg>
@@ -515,7 +513,7 @@
     </div>
   </div>
 
-  <!-- MODAL POPUP QUIT SESSION (IOS NATIVE DIALOG) -->
+  <!-- MODAL POPUP QUIT SESSION -->
   <div id="quitModal" class="modal-backdrop">
     <div class="ios-alert">
       <div class="ios-alert-body">
@@ -616,7 +614,6 @@
 
   function submitQuit() {
     const pwd = document.getElementById('quitPassword').value;
-    // Password default diset "1234" atau bebas diganti
     if (pwd === "1234" || pwd === "admin" || pwd !== "") {
       isSecretUnlocked = true;
       closeQuitDialog();
