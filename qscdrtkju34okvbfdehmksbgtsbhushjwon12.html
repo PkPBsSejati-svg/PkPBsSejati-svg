@@ -34,9 +34,9 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      /* Penanganan Notch & Home Bar iOS */
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
+      /* Memastikan status bar HP (jam & baterai) tidak tertutup */
+      padding-top: max(20px, env(safe-area-inset-top));
+      padding-bottom: calc(50px + env(safe-area-inset-bottom));
     }
 
     /* FULLSCREEN OVERLAY */
@@ -69,7 +69,6 @@
       cursor: pointer;
     }
 
-    /* BISA DI-PINDAHKAN KE HOME SCREEN PADA IOS */
     .ios-pwa-hint {
       display: none;
       margin-top: 15px;
@@ -114,7 +113,7 @@
     .container {
       width: 100%;
       max-width: 500px;
-      padding: 20px;
+      padding: 20px 20px 10px 20px;
     }
 
     .tab-content {
@@ -204,7 +203,7 @@
     #examFrameContainer {
       display: none;
       width: 100%;
-      height: calc(100vh - 52px);
+      height: calc(100vh - 102px);
       background: white;
     }
 
@@ -214,7 +213,64 @@
       border: none;
     }
 
-    /* FITUR IOS SIMULATED FULLSCREEN OVERLAY (UTUTUP SEMUA UI BROWSER) */
+    /* BOTTOM NAVBAR UI (SAMA PERSIS SEPERTI GAMBAR) */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      background: #d1d5db;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+      z-index: 200;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .bottom-left-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+
+    .bottom-left-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bottom-right-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .bottom-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bottom-icon-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: #374151;
+      stroke-width: 2;
+      fill: none;
+    }
+
     body.ios-simulated-fullscreen {
       position: fixed;
       top: 0;
@@ -234,7 +290,6 @@
     <p style="margin-top: 10px; font-size: 14px; color: #cbd5e1;">Anda harus masuk ke mode layar penuh untuk mengakses soal.</p>
     <button onclick="enterFullscreen()">Masuk Layar Penuh</button>
 
-    <!-- PETUNJUK KHUSUS IOS/IPHONE -->
     <div id="iosHint" class="ios-pwa-hint">
       *Untuk iOS/iPhone: Tekan tombol <b>Bagikan (Share)</b> di Safari lalu pilih <b>"Tambah ke Utama" (Add to Home Screen)</b> agar dapat berjalan dalam mode aplikasi penuh tanpa bar alamat.
     </div>
@@ -242,21 +297,24 @@
 
   <!-- NAVIGASI ATAS -->
   <div class="navbar">
-    <button class="nav-btn" onclick="switchTab('homeTab', this)">Home</button>
+    <button class="nav-btn active" onclick="switchTab('homeTab', this)">Home</button>
     <button class="nav-btn" onclick="switchTab('kelasXTab', this)">Kelas X</button>
     <button class="nav-btn" onclick="switchTab('kelasXITab', this)">Kelas XI</button>
-    <button class="nav-btn active" onclick="switchTab('kelasXIITab', this)">Kelas XII</button>
+    <button class="nav-btn" onclick="switchTab('kelasXIITab', this)">Kelas XII</button>
   </div>
 
   <!-- CONTAINER UNTUK TIAP HALAMAN TAB -->
   <div class="container" id="mainContainer">
 
-    <!-- HOME -->
-    <div id="homeTab" class="tab-content">
-      <h2 style="text-align: center; margin-top: 20px;">SMA KRISTEN SATYA WACANA</h2>
-      <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">Leader - Explorer - Archiever - Disciple</p>
+    <!-- HOME TAB DENGAN LOGO BARU SEPERTI GAMBAR -->
+    <div id="homeTab" class="tab-content active">
+      <h2 style="text-align: center; font-size: 18px; margin-top: 10px; color: #1e293b;">SMA KRISTEN SATYA WACANA</h2>
+      <p style="text-align: center; color: #475569; font-weight: bold; font-size: 13px; margin-bottom: 20px;">Leader - Explorer - Archiever - Disciple</p>
+      
       <div style="text-align: center;">
-        <img src="https://via.placeholder.com/280x280?text=ASESMEN" alt="Asesmen Logo" style="max-width: 80%; height: auto;">
+        <!-- LOGO ASESMEN BARU SESUAI GAMBAR -->
+        <img src="logo-asesmen.png" alt="Logo Asesmen" style="width: 260px; max-width: 85%; height: auto; border-radius: 50%;">
+        <div style="margin-top: 10px; color: #64748b; font-size: 13px;">n03g</div>
       </div>
     </div>
 
@@ -294,7 +352,7 @@
     </div>
 
     <!-- KELAS XII -->
-    <div id="kelasXIITab" class="tab-content active">
+    <div id="kelasXIITab" class="tab-content">
       <h2>ASESMEN KELAS XII</h2>
       <marquee class="running-text" behavior="scroll" direction="left" scrollamount="6">
         <h4>Takut akan TUHAN adalah permulaan pengetahuan</h4>
@@ -344,15 +402,39 @@
     <iframe id="examIframe" src="about:blank"></iframe>
   </div>
 
+  <!-- BOTTOM BAR UI SESUAI DENGAN FOTO REAL (IMAGE_5.PNG) -->
+  <div class="bottom-bar">
+    <div class="bottom-left-icon">
+      <img src="logo-asesmen.png" alt="Icon">
+    </div>
+    <div class="bottom-right-actions">
+      <!-- Icon Split / Expand Screen -->
+      <button class="bottom-icon-btn" title="Resize">
+        <svg viewBox="0 0 24 24">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+        </svg>
+      </button>
+      <!-- Icon Refresh -->
+      <button class="bottom-icon-btn" onclick="location.reload()" title="Refresh">
+        <svg viewBox="0 0 24 24">
+          <path d="M23 4v6h-6M1 20v-6h6" />
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+        </svg>
+      </button>
+      <!-- Icon Power / Exit -->
+      <button class="bottom-icon-btn" onclick="handleSecretTap()" title="Power">
+        <svg viewBox="0 0 24 24">
+          <path d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
 <script>
   let isSecretUnlocked = false;
 
-  // DETEKSI PERANGKAT IOS / IPHONE / IPAD
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-  // DETEKSI APAKAH DIBUKA DARI HOMESCREEN (STANDALONE PWA MODE)
-  const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 
   window.addEventListener('DOMContentLoaded', () => {
     if (isIOS) {
@@ -360,7 +442,6 @@
     }
   });
 
-  // MASUK MODE FULLSCREEN ATAU SIMULASI FULLSCREEN IOS
   function enterFullscreen() {
     const elem = document.documentElement;
 
@@ -372,7 +453,6 @@
       elem.msRequestFullscreen();
     }
     
-    // Khusus iOS
     if (isIOS) {
       window.scrollTo(0, 1);
       document.body.classList.add('ios-simulated-fullscreen');
@@ -393,7 +473,6 @@
     }
   }
 
-  // BUKA SOAL
   function openExam(url) {
     document.getElementById('mainContainer').style.display = 'none';
     const frameContainer = document.getElementById('examFrameContainer');
@@ -403,7 +482,6 @@
     frameContainer.style.display = 'block';
   }
 
-  // PINDAH TAB NAVIGASI
   function switchTab(tabId, btn) {
     document.getElementById('examFrameContainer').style.display = 'none';
     document.getElementById('examIframe').src = 'about:blank';
@@ -416,7 +494,6 @@
     btn.classList.add('active');
   }
 
-  // TOGGLE ACCORDION
   function toggle(el) {
     let content = el.nextElementSibling;
     if (content) {
@@ -424,7 +501,6 @@
     }
   }
 
-  // SECRET TAP UNTUK KELUAR FULLSCREEN / UNLOCK
   let tapCount = 0;
   let tapTimer = null;
   function handleSecretTap() {
@@ -451,7 +527,6 @@
     }
   }
 
-  // DATE & TIME TICKER
   function updateDateTime() {
     const now = new Date();
     const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
